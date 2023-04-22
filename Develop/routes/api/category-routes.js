@@ -16,15 +16,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
  try {
-  const categoryId = req.params.id;
-  const categoryData = await Category.findByPk(categoryId, {
-    include: [{ model: Product }]
+  const categoryByPk = await Category.findByPk(req.params.id, {
+    include: [{ model: Product }],
  });
- if (!categoryData) {
+ if (!categoryByPk) {
   res.status(404).json({ message: "Category not found!" });
   return;
  }
- res.status(200).json(categoryData);
+ res.status(200).json(categoryByPk);
  } catch (err) {
   res.status(500),json(err)
  }
@@ -42,17 +41,16 @@ try {
 
 router.put('/:id', async (req, res) => {
   try{
-    const categoryId = req.params.id;
-    const categoryData = await Category.update(req.body, {
+    const updateCategoryById = await Category.update(req.params.id, req.body, {
       where: {
-        id: categoryId
+        id: category_name
       },
     });
-    if (!categoryData[0]) {
-      res.status(404).json( { message: "Category not found" });
+    if (!updateCategoryById[0]) {
+      res.status(404).json( { message: "Category Id not found" });
       return;
     }
-    res.status(200).json({ message: "Category has been updated! "});
+    res.status(200).json({ message: "Category Id has been updated! "});
   } catch (err) {
     res.status(500),json(err);
   }
@@ -60,17 +58,16 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try{
-    const categoryId = req.params.id;
-    const categoryData = await Category.destroy({
+    const deleteCategoryById = await Category.destroy(req.params.id, {
       where: {
-        id: categoryId
+        id: category_name
       },
     });
-    if (!categoryData) {
-      res.status(404).json({ message: "Category not found "});
+    if (!deleteCategoryById) {
+      res.status(404).json({ message: "Category Id not found "});
       return;
     }
-    res.status(200).json({ message: "Category has been deleted! "});
+    res.status(200).json({ message: "Category Id has been deleted! "});
   } catch (err) {
     res.status(500),json(err);
   }
