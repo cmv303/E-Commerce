@@ -64,6 +64,7 @@ router.put("/:id", async (req, res) => {
     });
 
     if (!updatedProduct) {
+      res.status(404).json ({ message: "No product to update! "});
       return;
     }
 
@@ -95,6 +96,7 @@ router.put("/:id", async (req, res) => {
         });
 
         if (!updatedProductTag) {
+          res.status(404).json ({ message: "No product to update! "});
           return;
         }
 
