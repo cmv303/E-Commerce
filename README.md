@@ -30,9 +30,9 @@ Install dependencies
 ```
 
 access your environmental variables
+(MAKE SURE YOU HAVE .env IN YOUR LOCAL REPO)
 
 ```bash
-(MAKE SURE YOU HAVE .env IN YOUR LOCAL REPO)
 mysql -u root -p
 (insert your password)
 SOURCE db/schema.sql
@@ -53,7 +53,8 @@ Start the server
 
 ## Demo
 
-[screenshot here]
+<img width="1271" alt="Screenshot 2023-04-26 at 11 35 39 AM" src="https://user-images.githubusercontent.com/115678318/234628007-688dd141-9eab-42d1-a861-820894d543f0.png">
+
 
 ## Deployment
 
