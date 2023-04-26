@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Tag, Product, ProductTag } = require("../../models");
 
 // The `/api/tags` endpoint
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const getAllTags = await Tag.findAll({
       include: [{ model: Product, through: ProductTag }],
@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const singleTagByPk = await Tag.findByPk(req.params.id, {
       include: [{ model: Product, through: ProductTag }],
     });
     if (!singleTagByPk) {
-      res.status(404).json ({ message: "No tag found with that id! "});
+      res.status(404).json({ message: "No tag found with that id! " });
       return;
     }
     res.status(200).json(singleTagByPk);
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const createNewTag = await Tag.create(req.body);
     res.status(200).json(createNewTag);
@@ -41,11 +41,11 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const updatedTagbyId = await Tag.update(req.body, {
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
     });
     if (!updatedTagbyId[0]) {
@@ -59,15 +59,17 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const deleteTagById = await Tag.destroy({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
     });
     if (!deleteTagById) {
-      res.status(404).json({ message: "No tag found with that id to delete! "});
+      res
+        .status(404)
+        .json({ message: "No tag found with that id to delete! " });
       return;
     }
     res.status(200).json(deleteTagById);
