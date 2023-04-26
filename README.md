@@ -30,6 +30,7 @@ Install dependencies
 ```
 
 access your environmental variables
+
 (MAKE SURE YOU HAVE .env IN YOUR LOCAL REPO)
 
 ```bash
