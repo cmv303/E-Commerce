@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
+const { findAll } = require("../../models/Product");
 
 // The `/api/products` endpoint
 router.get("/", async (req, res) => {
@@ -36,12 +37,15 @@ router.post("/", async (req, res) => {
     const createNewProduct = await Product.create(req.body);
 
     if (req.body.tagIds.length) {
+      console.log("here is array", req.body.tagIds);
+      console.log("new product", createNewProduct.id)
       const productTagIdArr = req.body.tagIds.map((tag_id) => {
         return {
           product_id: createNewProduct.id,
           tag_id,
         };
       });
+      console.log("product tag array", productTagIdArr);
       await ProductTag.bulkCreate(productTagIdArr);
     }
     const newProduct = await Product.findByPk(createNewProduct.id, {
@@ -62,16 +66,18 @@ router.put("/:id", async (req, res) => {
         id: req.params.id,
       },
     });
+    console.log("updated products before", updatedProduct, req.params.id)
 
     if (!updatedProduct) {
       res.status(404).json({ message: "No product to update! " });
       return;
     }
+    console.log("updated Products", updatedProduct);
 
     const allProductTags = await ProductTag.findAll({
       where: { product_id: req.params.id },
     });
-
+    console.log("findAll productTags", allProductTags, findAll);
     const productTagIds = allProductTags.map(({ tag_id }) => tag_id);
 
     const newProductTags = req.body.tagIds
@@ -86,11 +92,14 @@ router.put("/:id", async (req, res) => {
     const productTagsToRemove = allProductTags
       .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
       .map(({ id }) => id);
+      console.log("All product tags", allProductTags);
+      console.log("productTagsToRemove", productTagsToRemove)
 
     await Promise.all([
       ProductTag.destroy({ where: { id: productTagsToRemove } }),
       ProductTag.bulkCreate(newProductTags),
     ]);
+    console.log("Promise all", productTagsToRemove)
 
     const updatedProductTag = await ProductTag.findAll({
       where: { product_id: req.params.id },
