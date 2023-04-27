@@ -58,6 +58,7 @@ Start the server
 ## Deployment
 
 To see a walk-through tutorial, click here:
+https://drive.google.com/file/d/1M6-rFGk8VrZYF9FpPuZ8L73iPhYqHC-Y/view
 
 ## License
 
