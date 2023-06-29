@@ -1,18 +1,17 @@
 # E-Commerce (back-end)
-
 This application takes an already working Express.js API and configures it to use Sequelize to interact with a MySQL database.
 
 A walk-through tutorial via Insomnia will show you how this functions, assuring that CRUD functionality is working as it should.
 
-## Features
 
+## Features
 - Express
 - MySQL2
 - Sequelize
 - dotenv
 
-## Installation
 
+## Installation
 Install dependencies with npm
 
 ```cmd-line
@@ -21,8 +20,8 @@ Install dependencies with npm
 
 Requires `express`, `mysql2`, and `.env`
 
-## Run Locally
 
+## Run Locally
 Install dependencies
 
 ```bash
@@ -51,15 +50,15 @@ Start the server
   npm run start
 ```
 
-## Demo
 
+## Demo
 <img width="1271" alt="Screenshot 2023-04-26 at 11 35 39 AM" src="https://user-images.githubusercontent.com/115678318/234628007-688dd141-9eab-42d1-a861-820894d543f0.png">
 
-## Deployment
 
+## Deployment
 To see a walk-through tutorial, click here:
 https://drive.google.com/file/d/1M6-rFGk8VrZYF9FpPuZ8L73iPhYqHC-Y/view
 
-## License
 
+## License
 Please refer to license in Repo.
